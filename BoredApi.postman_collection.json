@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "fafe32b6-6258-4416-882a-86ba5b75bfdc",
+		"_postman_id": "3dc52458-8fb2-4736-9300-7532068ca0e0",
 		"name": "BoredApi",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "7177155"
@@ -63,9 +63,6 @@
 							"pm.test(\"Status code is 200\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
 							"});\r",
-							"// pm.test(\"Body matches relaxation activity\", function () {\r",
-							"//     pm.expect(pm.response.text()).to.include(\"relaxation\");\r",
-							"// });\r",
 							"pm.test(\"Check relaxation activity\", function () {\r",
 							"    var jsonData = pm.response.json();\r",
 							"    pm.expect(jsonData.type).to.eql(\"relaxation\");\r",
@@ -152,6 +149,221 @@
 						{
 							"key": "participants?type",
 							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get a recreational activity",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Check recreational activity\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.type).to.eql(\"recreational\");\r",
+							"});\r",
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://www.boredapi.com/api/activity?type=recreational",
+					"protocol": "https",
+					"host": [
+						"www",
+						"boredapi",
+						"com"
+					],
+					"path": [
+						"api",
+						"activity"
+					],
+					"query": [
+						{
+							"key": "type",
+							"value": "recreational"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get a recreational activity with one participant",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Check two participants\", function() {\r",
+							"    let jsonData = pm.response.json();\r",
+							"    if (jsonData.error === \"No activity found with the specified parameters\") {\r",
+							"        pm.expect(jsonData.error === \"No activity found with the specified parameters\")\r",
+							"    } else {\r",
+							"        pm.expect(jsonData.type).to.eql(\"recreational\");\r",
+							"        pm.expect(jsonData.participants).to.eql(1);\r",
+							"    }\r",
+							"});\r",
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://www.boredapi.com/api/activity?type=recreational&participants=1",
+					"protocol": "https",
+					"host": [
+						"www",
+						"boredapi",
+						"com"
+					],
+					"path": [
+						"api",
+						"activity"
+					],
+					"query": [
+						{
+							"key": "type",
+							"value": "recreational"
+						},
+						{
+							"key": "participants",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get a recreational activity with two participants",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Check two participants\", function() {\r",
+							"    let jsonData = pm.response.json();\r",
+							"    if (jsonData.error === \"No activity found with the specified parameters\") {\r",
+							"        pm.expect(jsonData.error === \"No activity found with the specified parameters\")\r",
+							"    } else {\r",
+							"        pm.expect(jsonData.type).to.eql(\"recreational\");\r",
+							"        pm.expect(jsonData.participants).to.eql(2);\r",
+							"    }\r",
+							"});\r",
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://www.boredapi.com/api/activity?type=recreational&participants=2",
+					"protocol": "https",
+					"host": [
+						"www",
+						"boredapi",
+						"com"
+					],
+					"path": [
+						"api",
+						"activity"
+					],
+					"query": [
+						{
+							"key": "type",
+							"value": "recreational"
+						},
+						{
+							"key": "participants",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get a recreational activity with three participants",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Check two participants\", function() {\r",
+							"    let jsonData = pm.response.json();\r",
+							"    if (jsonData.error === \"No activity found with the specified parameters\") {\r",
+							"        pm.expect(jsonData.error === \"No activity found with the specified parameters\")\r",
+							"    } else {\r",
+							"        pm.expect(jsonData.type).to.eql(\"recreational\");\r",
+							"        pm.expect(jsonData.participants).to.eql(3);\r",
+							"    }\r",
+							"});\r",
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://www.boredapi.com/api/activity?type=recreational&participants=3",
+					"protocol": "https",
+					"host": [
+						"www",
+						"boredapi",
+						"com"
+					],
+					"path": [
+						"api",
+						"activity"
+					],
+					"query": [
+						{
+							"key": "type",
+							"value": "recreational"
+						},
+						{
+							"key": "participants",
+							"value": "3"
 						}
 					]
 				}
